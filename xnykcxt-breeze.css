@@ -710,8 +710,15 @@
       display: block !important;
       height: -moz-available !important;
     }
+    .content {
+      border-style: unset !important;
+    }
     .wrap > .nav,
-    .content > .top {
+    .content .top,
+    .content .courseStatistics,
+    .content .alreadyAnswer,
+    .content .myAnswer,
+    .content .result2 {
       display: none !important;
     }
     .ant-tag {
