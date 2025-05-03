@@ -43,7 +43,7 @@
     border-top-style: solid;
     border-left-style: solid;
     border-radius: unset !important;
-    height: calc(100vh - 36px) !important;
+    height: calc(100vh - 36px) !important
   }
   .container:has(.swiper-slide:only-child) > div.content {
     height: 100vh !important;
@@ -151,6 +151,12 @@
 
   div.top .ant-statistic-content {
     color: var(--canvas-text-color) !important;
+  }
+
+  div.top .right > .ant-btn:nth-of-type(1):has(.anticon-scan),
+  div.top .countdown > span:nth-of-type(1),
+  div.top span:has(+ .countdown) {
+    display: none !important;
   }
 
   /* button */
@@ -671,6 +677,22 @@
   .quesContent .myAnswer .result {
     color: var(--text-secondary) !important;
   }
+  .quesContent .itemContent,
+  .quesContent .textContent {
+    font-family: serif;
+  }
+  /* btns */
+  .quesContent:is(.active) > ul > li .ant-btn {
+    border-radius: unset !important;
+  }
+  .quesContent:is(.active) > ul > li:nth-of-type(1) .ant-btn {
+    border-top-left-radius: 5px !important;
+    border-bottom-left-radius: 5px !important;
+  }
+  .quesContent:is(.active) > ul > li:nth-last-of-type(1) .ant-btn {
+    border-top-right-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
+  }
 
   /* submission, edition */
   .con > .oper {
@@ -718,7 +740,8 @@
     .content .courseStatistics,
     .content .alreadyAnswer,
     .content .myAnswer,
-    .content .result2 {
+    .content .result2,
+    .container .tabs {
       display: none !important;
     }
     .ant-tag {
