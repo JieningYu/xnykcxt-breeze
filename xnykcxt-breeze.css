@@ -3,24 +3,48 @@
     --system-accent-color: AccentColor;
 
     --alpha: 24%;
-    --primary-bg: #efeff0;
-    --secondary-bg: #C6C8C9;
     --primary-bg-reduced: color-mix(in srgb, var(--secondary-bg) var(--alpha), transparent);
     --primary-color: var(--system-accent-color, #38ADEA);
     --primary-color-reduced: color-mix(in srgb, var(--primary-color) var(--alpha), transparent);
-    --positive-color: #20AE5E;
-    --positive-color-reduced: color-mix(in srgb, var(--positive-color) var(--alpha), transparent);
-    --warning-color: #F77300;
-    --warning-color-reduced: color-mix(in srgb, var(--warning-color) var(--alpha), transparent);
-    --danger-color: #db4251;
-    --danger-color-reduced: color-mix(in srgb, var(--danger-color) var(--alpha), transparent);
-    --border-color: #b8babd;
-    --border-color-reduced: #c6c9ca;
-    --canvas-text-color: #232629;
-    --button-text-color: var(--system-button-text-color, var(--canvas-text-color));
-    --text-secondary: #565a5f;
-    --card-bg: #f9fbfcbd;
     --shadow-color: #0000005c;
+
+    @media (prefers-color-scheme: light) {
+      --primary-bg: #EEF0F1;
+      --canvas-bg: #FEFFFE;
+      --secondary-bg: #E2E5E7;
+      --border-color: #b8babd;
+      --border-color-reduced: #c6c9ca;
+      --canvas-text-color: #232629;
+      --button-text-color: var(--canvas-text-color);
+      --text-secondary: #6F7C8A;
+      --card-bg: #f9fbfcbd;
+      --positive-color: #20AE5E;
+      --warning-color: #F77300;
+      --danger-color: #db4251;
+      --button-bg: #FEFFFE;
+      --button-active-bg: #D5D7D7;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      --primary-bg: #292E32;
+      --canvas-bg: #1A1D20;
+      --secondary-bg: #30363B;
+      --border-color: #5A5D62;
+      --border-color-reduced: #626365;
+      --canvas-text-color: #FCFCFC;
+      --button-text-color: var(--canvas-text-color);
+      --text-secondary: #FCFCFC;
+      --card-bg: #f9fbfcbd;
+      --positive-color: #20AE5E;
+      --warning-color: #F77300;
+      --danger-color: #DB4351;
+      --button-bg: #30363B;
+      --button-active-bg: #44474C;
+    }
+
+    --positive-color-reduced: color-mix(in srgb, var(--positive-color) var(--alpha), transparent);
+    --warning-color-reduced: color-mix(in srgb, var(--warning-color) var(--alpha), transparent);
+    --danger-color-reduced: color-mix(in srgb, var(--danger-color) var(--alpha), transparent);
   }
 
   /* global */
@@ -35,7 +59,9 @@
     margin: unset !important;
   }
 
-
+  .container {
+    background-color: var(--canvas-bg) !important;
+  }
   .container > div.content {
     padding-top: 10px !important;
     padding-bottom: 150px !important;
@@ -44,7 +70,8 @@
     border-top-style: solid;
     border-left-style: solid;
     border-radius: unset !important;
-    height: calc(100vh) !important
+    height: calc(100vh) !important;
+    background-color: var(--canvas-bg) !important;
   }
   .container:has(.swiper-slide) > div.content {
     height: calc(100vh - 36px) !important;
@@ -154,7 +181,8 @@
     padding: unset !important;
   }
 
-  div.top .ant-statistic-content {
+  div.top .ant-statistic-content,
+  div.top .countdown span {
     color: var(--canvas-text-color) !important;
   }
 
@@ -177,15 +205,15 @@
   .btn,
   .board > .tools > *,
   div.nav > .put {
-    background-color: #fcfcfc !important;
+    background-color: var(--button-bg) !important;
     cursor: default !important;
     border-radius: 5px !important;
     transition: border-color 0.15s ease, background-color 0.1s ease, box-shadow 0.15s ease !important;
     text-shadow: unset !important;
-    border-color: #e0e1e2 !important;
+    border-color: var(--border-color) !important;
     border-width: thin !important;
     border-style: solid;
-    box-shadow: 0 1px 0 0 #e0e1e2 !important;
+    box-shadow: 0 1px 0 0 var(--border-color) !important;
     color: var(--button-text-color) !important;
   }
 
@@ -280,13 +308,13 @@
 
   div.top button.ant-btn-primary,
   .board > .tools > *:has(.active) {
-    background-color: #d4d6d8 !important;
+    background-color: var(--button-active-bg) !important;
     border-color: var(--border-color-reduced) !important;
   }
 
   div.top button.ant-btn-loading {
     cursor: wait !important;
-    color: #c6c6c7 !important;
+    color: var(--primary-bg) !important;
   }
 
   div.top button.ant-btn-loading::before {
@@ -317,13 +345,13 @@
   }
 
   div.top button.ant-btn-danger:hover {
-    border-color: #f77400 !important;
+    border-color: var(--warning-color) !important;
     color: var(--text-secondary) !important;
   }
 
   div.top button.ant-btn-danger:active {
-    border-color: #f77400 !important;
-    background-color: #f0d7c0 !important;
+    border-color: var(--warning-color) !important;
+    background-color: var(--warning-color-reduced) !important;
   }
 
   /* tabs */
@@ -562,7 +590,7 @@
   }
 
   div.nav > .put:hover {
-    background-color: #fcfcfc !important;
+    background-color: var(--primary-bg) !important;
   }
   div.nav > .put:active {
     background-color: var(--primary-color-reduced) !important;
@@ -585,6 +613,14 @@
   div.nav > .treeBox > .title {
     height: 0 !important;
     font-size: 0 !important;
+  }
+  div.nav > .treeBox .ant-tree,
+  div.nav > .treeBox .ant-tree-switcher,
+  div.nav > .treeBox .ant-tree-node-content-wrapper,
+  div.nav > .treeBox .ant-tree-title,
+  div.nav > .treeBox .ant-tree-title span,
+  div.nav > .treeBox .ant-tree-treenode-selected {
+    color: var(--canvas-text-color) !important;
   }
 
   div.nav > .treeBox .ant-tree-child-tree > li:first-child,
@@ -681,10 +717,30 @@
     background-color: var(--primary-bg-reduced);
   }
   .quesContent .itemContent .txt *,
-  .quesContent .textContent {
+  .quesContent .textContent,
+  .quesContent .questionAnswer *,
+  .quesContent .questionAnalysis * {
     font-family: serif !important;
   }
+  @media (prefers-color-scheme: dark) {
+    .quesContent .itemContent .txt,
+    .quesContent .textContent,
+    .quesContent .itemContent .txt img,
+    .quesContent .textContent img,
+    .quesContent .questionAnswer,
+    .quesContent .questionAnalysis,
+    .quesContent .questionAnswer img,
+    .quesContent .questionAnalysis img {
+      filter: invert(100%);
+    }
 
+    .quesContent img {
+      background-color: white;
+    }
+  }
+  .fileContent {
+    color: var(--canvas-text-color) !important;
+  }
   .quesContent .alreadyAnswer .answer,
   .quesContent .result,
   .quesContent .result2 > .imgBox {
