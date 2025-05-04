@@ -698,7 +698,7 @@
   .quesContent .alreadyAnswer .answer,
   .quesContent .result {
     font-size: 16px !important;
-    font-weight: lighter !important;
+    font-weight: 350 !important;
     height: 25px !important;
     width: 75px !important;
     text-align: center !important;
