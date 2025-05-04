@@ -1,7 +1,6 @@
 @-moz-document domain("xnykcxt.com") {
   :root {
     --system-accent-color: AccentColor;
-    --system-button-text-color: ButtonText;
 
     --alpha: 24%;
     --primary-bg: #efeff0;
@@ -9,13 +8,15 @@
     --primary-bg-reduced: color-mix(in srgb, var(--secondary-bg) var(--alpha), transparent);
     --primary-color: var(--system-accent-color, #38ADEA);
     --primary-color-reduced: color-mix(in srgb, var(--primary-color) var(--alpha), transparent);
-    --warning-color: #e9af3c;
+    --positive-color: #20AE5E;
+    --positive-color-reduced: color-mix(in srgb, var(--positive-color) var(--alpha), transparent);
+    --warning-color: #F77300;
     --warning-color-reduced: color-mix(in srgb, var(--warning-color) var(--alpha), transparent);
-    --danger-color: #db4351;
+    --danger-color: #db4251;
     --danger-color-reduced: color-mix(in srgb, var(--danger-color) var(--alpha), transparent);
     --border-color: #b8babd;
     --border-color-reduced: #c6c9ca;
-    --canvas-text-color: var(--system-button-text-color, #232629);
+    --canvas-text-color: #232629;
     --button-text-color: var(--system-button-text-color, var(--canvas-text-color));
     --text-secondary: #565a5f;
     --card-bg: #f9fbfcbd;
@@ -677,14 +678,73 @@
   .content,
   .content .quesContent.active,
   .content .quesContent:active {
-    background-color: #f9f9f9;
+    background-color: var(--primary-bg-reduced);
   }
-  .quesContent .myAnswer .result {
-    color: var(--text-secondary) !important;
-  }
-  .quesContent .itemContent,
+  .quesContent .itemContent .txt *,
   .quesContent .textContent {
-    font-family: serif;
+    font-family: serif !important;
+  }
+
+  .quesContent .alreadyAnswer .answer,
+  .quesContent .result,
+  .quesContent .result2 > .imgBox {
+    color: var(--canvas-text-color) !important;
+    border-color: var(--canvas-text-color) !important;
+    border-style: solid !important;
+    border-width: thin !important;
+    border-radius: 0 !important;
+    background-color: transparent !important;
+  }
+  .quesContent .alreadyAnswer .answer,
+  .quesContent .result {
+    font-size: 16px !important;
+    font-weight: lighter !important;
+    height: 25px !important;
+    width: 75px !important;
+    text-align: center !important;
+    line-height: unset !important;
+  }
+  .quesContent .myAnswer > div {
+    padding-top: 0px !important;
+  }
+  .quesContent .alreadyAnswer .answer:has(+ .true),
+  .quesContent .result2 > .trueBorder > .bg > span {
+    background-color: var(--positive-color-reduced) !important;
+  }
+  .quesContent .result2 > .trueBorder > .bg span {
+    color: color-mix(in srgb, var(--positive-color) var(--alpha), var(--primary-bg)) !important;
+  }
+  .quesContent .alreadyAnswer .answer:has(+ .error),
+  .quesContent .result2 > .errorBorder > .bg > span {
+    background-color: var(--danger-color-reduced) !important;
+  }
+  .quesContent .result2 > .errorBorder > .bg span {
+    color: color-mix(in srgb, var(--danger-color) var(--alpha), var(--primary-bg)) !important;
+  }
+  .quesContent .alreadyAnswer .answer:has(+ .partRight),
+  .quesContent .result2 > .partRightBorder > .bg > span {
+    background-color: var(--warning-color-reduced) !important;
+  }
+  .quesContent .result2 > .partRightBorder > .bg span {
+    color: color-mix(in srgb, var(--warning-color) var(--alpha), var(--primary-bg)) !important;
+  }
+  .quesContent .result2 .bg > span,
+  .quesContent .result2 .imgBox {
+    text-align: center !important;
+    height: 90px !important;
+    width: 130px !important;
+  }
+  .quesContent .result2 .bg > span {
+    backdrop-filter: brightness(0.75);
+  }
+  .quesContent .badge-box {
+    color: transparent !important;
+    border-style: solid !important;
+    border-width: thin !important;
+    border-color: var(--canvas-text-color) !important;
+  }
+  .quesContent .alreadyAnswer .icon {
+    display: none !important;
   }
   /* btns */
   .quesContent:is(.active) > ul > li .ant-btn {
