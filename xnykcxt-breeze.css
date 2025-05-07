@@ -11,7 +11,7 @@
     @media (prefers-color-scheme: light) {
       --primary-bg: #EEF0F1;
       --canvas-bg: #FEFFFE;
-      --secondary-bg: #E2E5E7;
+      --secondary-bg: #C7C7C8;
       --border-color: #b8babd;
       --border-color-reduced: #c6c9ca;
       --canvas-text-color: #232629;
@@ -28,7 +28,7 @@
     @media (prefers-color-scheme: dark) {
       --primary-bg: #292E32;
       --canvas-bg: #1A1D20;
-      --secondary-bg: #30363B;
+      --secondary-bg: #22262A;
       --border-color: #5A5D62;
       --border-color-reduced: #626365;
       --canvas-text-color: #FCFCFC;
@@ -66,18 +66,18 @@
     padding-top: 10px !important;
     padding-bottom: 150px !important;
     border-color: var(--border-color);
-    border-width: 0.75px;
-    border-top-style: solid;
-    border-left-style: solid;
+    border-width: thin;
     border-radius: unset !important;
     height: calc(100vh) !important;
     background-color: var(--canvas-bg) !important;
   }
   .container:has(.swiper-slide) > div.content {
     height: calc(100vh - 36px) !important;
+    border-top-style: solid !important;
   }
   .container:has(.swiper-slide:only-child) > div.content {
     height: 100vh !important;
+    border-top-style: unset !important;
   }
 
   .emptyHeight {
@@ -273,7 +273,7 @@
   .board > .tools > *:hover,
   div.nav > .put:hover {
     border-color: var(--primary-color) !important;
-    transition: background-color 0.1s ease !important;
+    transition: background-color 1s ease !important;
   }
 
   button.ant-btn:focus-visible,
@@ -394,6 +394,9 @@
   div.tabs .swiper_box:has(.swiper-slide:only-child) {
     display: none !important;
   }
+  div.tabs .swiper_box {
+    background-color: var(--primary-bg) !important;
+  }
   div.tabs .swiper-container > .swiper-wrapper,
   div.tabs .swiper-container {
     width: fit-content !important;
@@ -430,6 +433,7 @@
   }
   div.tabs .swiper-container > .swiper-wrapper > .swiper-slide:hover {
     background-color: var(--primary-color-reduced) !important;
+    transition: background-color 0.25s ease !important;
   }
 
   div.tabs .swiper-container > .swiper-wrapper > .sideActive,
@@ -441,6 +445,7 @@
     border-bottom-color: var(--primary-bg) !important;
     border-top-left-radius: 5px !important;
     border-top-right-radius: 5px !important;
+    transition: unset !important;
   }
 
   div.tabs .swiper_box > .anticon {
@@ -583,6 +588,13 @@
     margin-right: unset !important;
     height: 36px !important;
     min-height: unset !important;
+    border-color: var(--border-color);
+  }
+
+  body:has(.swiper-slide:only-child) .slider,
+  body:not(:has(.swiper_box)) .slider {
+    border-width: thin;
+    border-right-style: solid;
   }
 
   div.nav > .slider .menu {
@@ -638,9 +650,8 @@
     margin: unset !important;
     border-radius: unset !important;
     border-color: var(--border-color);
-    border-width: 0.75px;
+    border-width: thin;
     border-top-style: solid;
-    border-left-style: solid;
     border-right-style: solid;
     height: calc(100vh - 36px) !important;
     width: 200px !important;
@@ -898,7 +909,8 @@
     .content .alreadyAnswer,
     .content .myAnswer,
     .content .result2,
-    .container .tabs {
+    .container .tabs,
+    .fileContent {
       display: none !important;
     }
     .ant-tag {
