@@ -34,7 +34,7 @@
       --canvas-text-color: #FCFCFC;
       --button-text-color: var(--canvas-text-color);
       --text-secondary: #FCFCFC;
-      --card-bg: #f9fbfcbd;
+      --card-bg: #292e32ba;
       --positive-color: #20AE5E;
       --warning-color: #F77300;
       --danger-color: #DB4351;
@@ -115,7 +115,8 @@
   }
 
   .ant-dropdown-menu,
-  .ant-select-dropdown-menu {
+  .ant-select-dropdown-menu,
+  .ant-dropdown-content {
     border-radius: 5px !important;
     background-color: var(--card-bg) !important;
     border-color: var(--border-color);
@@ -128,7 +129,8 @@
   }
 
   .ant-dropdown-menu-item,
-  .ant-select-dropdown-menu-item {
+  .ant-select-dropdown-menu-item,
+  .ant-dropdown-content > .item {
     background-color: unset !important;
     border-radius: 6px !important;
     transition: unset !important;
@@ -142,12 +144,46 @@
     color: var(--button-text-color) !important;
     padding-left: 6px !important;
     font-size: 14px !important;
+    .ant-checkbox-wrapper {
+      color: var(--button-text-color) !important;
+    }
   }
 
   .ant-dropdown-menu-item:hover,
   .ant-select-dropdown-menu-item:hover {
     background-color: var(--primary-color-reduced) !important;
     border-color: var(--primary-color);
+  }
+
+  /* checkbox */
+  .ant-checkbox .ant-checkbox-inner {
+    border-radius: 5px !important;
+    width: 18px !important;
+    height: 18px !important;
+    border-color: var(--border-color-reduced) !important;
+    border-width: 1px !important;
+    border-style: solid !important;
+    content: " " !important;
+    background-color: var(--canvas-bg) !important;
+    transition: unset !important;
+  }
+  .ant-checkbox-checked .ant-checkbox-inner {
+    background-color: var(--primary-color-reduced) !important;
+    border-color: var(--primary-color) !important;
+  }
+  .ant-checkbox:has( .ant-checkbox-input:active) .ant-checkbox-inner {
+    background-color: var(--button-active-bg) !important;
+  }
+  .ant-checkbox-checked:has( .ant-checkbox-input:active) .ant-checkbox-inner {
+    background-color: var(--primary-color) !important;
+  }
+  .ant-checkbox .ant-checkbox-inner::after {
+    transform: rotate(45deg) scale(1.2) translate(-50%, -50%) !important;
+    transition: unset !important;
+    border-color: var(--button-text-color) !important;
+  }
+  .ant-checkbox-checked::after {
+    all: unset !important;
   }
 
   /* topbar */
@@ -868,6 +904,9 @@
     .ant-tag {
       box-shadow: unset !important;
       border-style: unset !important;
+    }
+    .quesContent {
+      display: block !important;
     }
   }
 }
