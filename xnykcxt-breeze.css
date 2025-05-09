@@ -2,17 +2,18 @@
   :root {
     --system-accent-color: AccentColor;
 
-    --alpha: 24%;
     --primary-bg-reduced: color-mix(in srgb, var(--secondary-bg) var(--alpha), transparent);
     --primary-color: var(--system-accent-color, #38ADEA);
     --primary-color-reduced: color-mix(in srgb, var(--primary-color) var(--alpha), transparent);
     --shadow-color: #0000005c;
 
     @media (prefers-color-scheme: light) {
+      --alpha: 24%;
       --primary-bg: #EEF0F1;
       --canvas-bg: #FEFFFE;
       --secondary-bg: #C7C7C8;
       --border-color: #b8babd;
+      --btn-border-color: #D0D0D1;
       --border-color-reduced: #c6c9ca;
       --canvas-text-color: #232629;
       --button-text-color: var(--canvas-text-color);
@@ -22,14 +23,16 @@
       --warning-color: #F77300;
       --danger-color: #db4251;
       --button-bg: #FEFFFE;
-      --button-active-bg: #D5D7D7;
+      --button-active-bg: #c6c8c8a1;
     }
 
     @media (prefers-color-scheme: dark) {
+      --alpha: 32%;
       --primary-bg: #292E32;
       --canvas-bg: #1A1D20;
       --secondary-bg: #22262A;
       --border-color: #5A5D62;
+      --btn-border-color: #595D62;
       --border-color-reduced: #626365;
       --canvas-text-color: #FCFCFC;
       --button-text-color: var(--canvas-text-color);
@@ -39,12 +42,14 @@
       --warning-color: #F77300;
       --danger-color: #DB4351;
       --button-bg: #30363B;
-      --button-active-bg: #44474C;
+      --button-active-bg: #595d62a1;
     }
 
     --positive-color-reduced: color-mix(in srgb, var(--positive-color) var(--alpha), transparent);
     --warning-color-reduced: color-mix(in srgb, var(--warning-color) var(--alpha), transparent);
     --danger-color-reduced: color-mix(in srgb, var(--danger-color) var(--alpha), transparent);
+
+    --disabled-button-text-color: color-mix(in srgb, var(--button-text-color) 32%, transparent);
   }
 
   /* global */
@@ -66,7 +71,7 @@
     padding-top: 10px !important;
     padding-bottom: 150px !important;
     border-color: var(--border-color);
-    border-width: thin;
+    border-width: 1px;
     border-radius: unset !important;
     height: calc(100vh) !important;
     background-color: var(--canvas-bg) !important;
@@ -136,7 +141,7 @@
     transition: unset !important;
     cursor: default !important;
     border-color: transparent;
-    border-width: thin;
+    border-width: 1px;
     border-style: solid;
     min-height: unset !important;
     line-height: 20px !important;
@@ -144,9 +149,6 @@
     color: var(--button-text-color) !important;
     padding-left: 6px !important;
     font-size: 14px !important;
-    .ant-checkbox-wrapper {
-      color: var(--button-text-color) !important;
-    }
   }
 
   .ant-dropdown-menu-item:hover,
@@ -156,6 +158,15 @@
   }
 
   /* checkbox */
+  .ant-checkbox-wrapper {
+    color: var(--button-text-color) !important;
+  }
+  .ant-checkbox-wrapper,
+  .ant-checkbox,
+  .ant-checkbox .ant-checkbox-inner,
+  .ant-checkbox .ant-checkbox-input {
+    cursor: default !important;
+  }
   .ant-checkbox .ant-checkbox-inner {
     border-radius: 5px !important;
     width: 18px !important;
@@ -193,12 +204,11 @@
 
     border-radius: 5px !important;
     border-color: var(--border-color-reduced);
-    border-width: thin;
+    border-width: 1px;
     border-style: solid;
 
     box-shadow: unset !important;
-    transition: background-color 0.15s ease, box-shadow 0.15s ease,
-    backdrop-filter 0.15s ease !important;
+    transition: background-color 0.15s ease, box-shadow 0.15s ease !important;
 
     bottom: 10px;
 
@@ -235,8 +245,8 @@
 
   button.ant-btn,
   .oper-item > *,
-  .content-box > .item-box > div,
-  .content-box > .score-box > .item,
+  .content-box > .item-box .item,
+  .content-box > .score-box .item,
   .ant-tag,
   .btn,
   .board > .tools > *,
@@ -246,17 +256,28 @@
     border-radius: 5px !important;
     transition: border-color 0.15s ease, background-color 0.1s ease, box-shadow 0.15s ease !important;
     text-shadow: unset !important;
-    border-color: var(--border-color) !important;
-    border-width: thin !important;
+    border-color: var(--btn-border-color) !important;
+    border-width: 1px !important;
     border-style: solid;
-    box-shadow: 0 1px 0 0 var(--border-color) !important;
-    color: var(--button-text-color) !important;
+    @media (prefers-color-scheme: light) {
+      box-shadow: 0 1.25px 0 0 var(--btn-border-color) !important;
+    }
+    &:not([disabled="disabled"]) {
+      color: var(--button-text-color) !important;
+    }
+    &:is([disabled="disabled"]) {
+      color: var(--disabled-button-text-color) !important;
+    }
+  }
+
+  div.nav > .put {
+    background-color: color-mix(in srgb, var(--button-bg) var(80%), transparent) !important;
   }
 
   button.ant-btn::after,
   .oper-item > *::after,
-  .content-box > .item-box > div::after,
-  .content-box > .score-box > .item::after,
+  .content-box > .item-box .item::after,
+  .content-box > .score-box .item::after,
   .ant-tag::after,
   .btn::after,
   .board > .tools > *::after,
@@ -264,22 +285,22 @@
     all: unset;
   }
 
-  button.ant-btn:hover,
+  button.ant-btn:not([disabled="disabled"]):hover,
   .oper-item > *:hover,
-  .content-box > .item-box > div:hover,
-  .content-box > .score-box > .item:hover,
+  .content-box > .item-box .item:hover,
+  .content-box > .score-box .item:hover,
   .ant-tag:hover,
   .btn:hover,
   .board > .tools > *:hover,
   div.nav > .put:hover {
     border-color: var(--primary-color) !important;
-    transition: background-color 1s ease !important;
+    transition: background-color 0.1s ease, box-shadow 0.15s ease !important;
   }
 
-  button.ant-btn:focus-visible,
+  button.ant-btn:not([disabled="disabled"]):focus-visible,
   .oper-item > *:focus-visible,
-  .content-box > .item-box > div:focus-visible,
-  .content-box > .score-box > .item:focus-visible,
+  .content-box > .item-box .item:focus-visible,
+  .content-box > .score-box .item:focus-visible,
   .ant-tag:focus-visible,
   .btn:focus-visible,
   .board > .tools > *:focus-visible,
@@ -288,46 +309,76 @@
     box-shadow: 0 0 0 2.5px var(--primary-color-reduced) !important;
     color: var(--button-text-color) !important;
   }
-
-  button.ant-btn:active,
+  button.ant-btn:not([disabled="disabled"]):active,
   .oper-item > *:active,
-  .content-box > .item-box > div:active,
-  .content-box > .score-box > .item:active,
-  .content-box > .item-box > .green-active,
-  .content-box > .score-box > .active-green,
+  .content-box > .item-box .item:active,
+  .content-box > .score-box .item:active,
   .btn:active,
   .board > .tools > *:active,
   div.nav > .put:active {
     border-color: var(--primary-color) !important;
-    background-color: var(--primary-color-reduced) !important;
-    color: var(--button-text-color) !important;
-    transition: unset !important;
+    &:hover {
+      background-color: var(--primary-color-reduced) !important;
+      color: var(--button-text-color) !important;
+      transition: unset !important;
+      box-shadow: unset !important;
+    }
   }
 
-  button.ant-btn-primary {
+  button.ant-btn-primary:not([disabled="disabled"]) {
     border-color: var(--primary-color) !important;
     background-color: var(--primary-color-reduced) !important;
   }
 
-  button.ant-btn-danger:hover,
-  .content-box > .score-box > .active-yellow:hover {
+  .content-box > .score-box .active-green:hover,
+  .content-box > .item-box .green-active:hover {
+    border-color: var(--positive-color) !important;
+  }
+  .content-box > .item-box .green-active,
+  .content-box > .score-box .active-green {
+    border-color: var(--positive-color) !important;
+    background-color: var(--positive-color-reduced) !important;
+  }
+  .content-box > .score-box .active-green:active {
+    border-color: var(--positive-color) !important;
+
+    &:hover {
+      background-color: var(--positive-color-reduced) !important;
+    }
+  }
+
+  button.ant-btn-danger:not([disabled="disabled"]):hover,
+  .content-box > .score-box .active-yellow:hover {
     border-color: var(--warning-color) !important;
   }
-  button.ant-btn-danger:active,
-  .content-box > .score-box > .active-yellow,
-  .content-box > .score-box > .active-yellow:active {
+  .content-box > .score-box .active-yellow {
     border-color: var(--warning-color) !important;
     background-color: var(--warning-color-reduced) !important;
   }
+  button.ant-btn-danger:not([disabled="disabled"]):active,
+  .content-box > .score-box .active-yellow:active {
+    border-color: var(--warning-color) !important;
 
-  .content-box > .score-box > .active-red:hover,
-  .content-box > .item-box > .red-active:hover {
+    &:hover {
+      background-color: var(--warning-color-reduced) !important;
+    }
+  }
+
+  .content-box > .score-box .active-red:hover,
+  .content-box > .item-box .red-active:hover {
     border-color: var(--danger-color) !important;
   }
-  .content-box > .item-box > .red-active,
-  .content-box > .score-box > .active-red:active {
+  .content-box > .item-box .red-active,
+  .content-box > .score-box .active-red {
     border-color: var(--danger-color) !important;
     background-color: var(--danger-color-reduced) !important;
+  }
+  .content-box > .score-box .active-red:active {
+    border-color: var(--danger-color) !important;
+
+    &:hover {
+      background-color: var(--danger-color-reduced) !important;
+    }
   }
 
   /* clean button */
@@ -335,14 +386,19 @@
   .oper-item > *,
   .board > .tools > * {
     background-color: transparent !important;
-    color: var(--button-text-color) !important;
     border-color: transparent !important;
-    border-width: thin;
+    border-width: 1px;
     border-style: solid;
     box-shadow: unset !important;
+    &:not([disabled="disabled"]) {
+      color: var(--button-text-color) !important;
+    }
+    &:is([disabled="disabled"]) {
+      color: var(--disabled-button-text-color) !important;
+    }
   }
 
-  div.top button.ant-btn-primary,
+  div.top button.ant-btn-primary:not([disabled="disabled"]),
   .board > .tools > *:has(.active) {
     background-color: var(--button-active-bg) !important;
     border-color: var(--border-color-reduced) !important;
@@ -358,7 +414,7 @@
     border-color: transparent !important;
   }
 
-  div.top button.ant-btn:focus-visible,
+  div.top button.ant-btn:not([disabled="disabled"]):focus-visible,
   .oper-item > *:focus-visible,
   .board > .tools > *:focus-visible {
     border-color: var(--primary-color) !important;
@@ -366,28 +422,34 @@
     color: var(--button-text-color) !important;
   }
 
-  div.top button.ant-btn:hover,
+  div.top button.ant-btn:not([disabled="disabled"]):hover,
   .oper-item > *:hover,
   .board > .tools > *:hover {
     border-color: var(--primary-color) !important;
     color: var(--text-secondary) !important;
   }
 
-  div.top button.ant-btn:active,
+  div.top button.ant-btn:not([disabled="disabled"]):active,
   .oper-item > *:active,
   .board > .tools > *:active {
     border-color: var(--primary-color) !important;
-    background-color: var(--primary-color-reduced) !important;
+
+    &:hover {
+      background-color: var(--primary-color-reduced) !important;
+    }
   }
 
-  div.top button.ant-btn-danger:hover {
+  div.top button.ant-btn-danger:not([disabled="disabled"]):hover {
     border-color: var(--warning-color) !important;
     color: var(--text-secondary) !important;
   }
 
-  div.top button.ant-btn-danger:active {
+  div.top button.ant-btn-danger:not([disabled="disabled"]):active {
     border-color: var(--warning-color) !important;
-    background-color: var(--warning-color-reduced) !important;
+
+    &:hover {
+      background-color: var(--warning-color-reduced) !important;
+    }
   }
 
   /* tabs */
@@ -425,8 +487,8 @@
     border-bottom-style: solid;
     border-left-style: solid;
     border-right-style: solid;
-    border-left-width: thin;
-    border-right-width: thin;
+    border-left-width: 1px;
+    border-right-width: 1px;
     border-color: transparent !important;
     width: 175px !important;
     cursor: default !important;
@@ -533,7 +595,7 @@
 
   div.courseStatistics > * {
     border-radius: 5px !important;
-    border-width: thin;
+    border-width: 1px;
     border-style: solid;
   }
 
@@ -575,7 +637,7 @@
   div.courseStatistics > .time .select {
     background-color: var(--primary-color-reduced) !important;
     border-radius: 5px !important;
-    border-width: thin;
+    border-width: 1px;
     border-style: solid;
     border-color: var(--primary-color);
   }
@@ -592,8 +654,8 @@
   }
 
   body:has(.swiper-slide:only-child) .slider,
-  body:not(:has(.swiper_box)) .slider {
-    border-width: thin;
+  body:not(:has(.swiper-slide)) .slider {
+    border-width: 1px;
     border-right-style: solid;
   }
 
@@ -650,7 +712,7 @@
     margin: unset !important;
     border-radius: unset !important;
     border-color: var(--border-color);
-    border-width: thin;
+    border-width: 1px;
     border-top-style: solid;
     border-right-style: solid;
     height: calc(100vh - 36px) !important;
@@ -751,7 +813,7 @@
 
   /* quests */
   .content .quesContent {
-    border-width: thin !important;
+    border-width: 1px !important;
     border-radius: 5px !important;
     margin-top: 0 !important;
     border-color: transparent !important;
@@ -792,9 +854,9 @@
   .quesContent .result,
   .quesContent .result2 > .imgBox {
     color: var(--canvas-text-color) !important;
-    border-color: var(--canvas-text-color) !important;
+    border-color: var(--text-secondary) !important;
     border-style: solid !important;
-    border-width: thin !important;
+    border-width: 1px !important;
     border-radius: 0 !important;
     background-color: transparent !important;
   }
@@ -843,7 +905,7 @@
   .quesContent .badge-box {
     color: transparent !important;
     border-style: solid !important;
-    border-width: thin !important;
+    border-width: 1px !important;
     border-color: var(--canvas-text-color) !important;
   }
   .quesContent .alreadyAnswer .icon {
@@ -852,21 +914,30 @@
   /* btns */
   .quesContent:is(.active) > ul > li .ant-btn {
     border-radius: unset !important;
+    border-left-width: 0.5px !important;
+    border-right-width: 0.5px !important;
   }
   .quesContent:is(.active) > ul > li:nth-of-type(1) .ant-btn {
     border-top-left-radius: 5px !important;
     border-bottom-left-radius: 5px !important;
+    border-left-width: 1px !important;
   }
   .quesContent:is(.active) > ul > li:nth-last-of-type(1) .ant-btn {
     border-top-right-radius: 5px !important;
     border-bottom-right-radius: 5px !important;
+    border-right-width: 1px !important;
+  }
+
+  /* ai table */
+  .container > .content:has(.content-box > .table) {
+    color: var(--canvas-text-color) !important;
   }
 
   /* submission, edition */
   .con > .oper {
     background: var(--primary-bg) !important;
     border-color: var(--border-color);
-    border-left-width: thin;
+    border-left-width: 1px;
     border-left-style: solid;
   }
   .oper-item {
@@ -910,7 +981,7 @@
     .content .myAnswer,
     .content .result2,
     .container .tabs,
-    .fileContent {
+    .content .file {
       display: none !important;
     }
     .ant-tag {
