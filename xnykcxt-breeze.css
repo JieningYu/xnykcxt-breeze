@@ -14,7 +14,6 @@
       --secondary-bg: #C7C7C8;
       --border-color: #b8babd;
       --btn-border-color: #D0D0D1;
-      --border-color-reduced: #c6c9ca;
       --canvas-text-color: #232629;
       --button-text-color: var(--canvas-text-color);
       --text-secondary: #6F7C8A;
@@ -27,13 +26,12 @@
     }
 
     @media (prefers-color-scheme: dark) {
-      --alpha: 32%;
+      --alpha: 48%;
       --primary-bg: #292E32;
       --canvas-bg: #1A1D20;
       --secondary-bg: #22262A;
       --border-color: #5A5D62;
       --btn-border-color: #595D62;
-      --border-color-reduced: #626365;
       --canvas-text-color: #FCFCFC;
       --button-text-color: var(--canvas-text-color);
       --text-secondary: #FCFCFC;
@@ -48,6 +46,9 @@
     --positive-color-reduced: color-mix(in srgb, var(--positive-color) var(--alpha), transparent);
     --warning-color-reduced: color-mix(in srgb, var(--warning-color) var(--alpha), transparent);
     --danger-color-reduced: color-mix(in srgb, var(--danger-color) var(--alpha), transparent);
+
+    --border-color-reduced: color-mix(in srgb, var(--border-color) var(--alpha), transparent);
+    --hybrid-bg: color-mix(in srgb, var(--primary-bg) 50%, var(--secondary-bg));
 
     --disabled-button-text-color: color-mix(in srgb, var(--button-text-color) 32%, transparent);
   }
@@ -69,12 +70,14 @@
   }
   .container > div.content {
     padding-top: 10px !important;
-    padding-bottom: 150px !important;
     border-color: var(--border-color);
     border-width: 1px;
     border-radius: unset !important;
     height: calc(100vh) !important;
     background-color: var(--canvas-bg) !important;
+    &:not(:has(> .question-body)) {
+      padding-bottom: 150px !important;
+    }
   }
   .container:has(.swiper-slide) > div.content {
     height: calc(100vh - 36px) !important;
@@ -83,6 +86,12 @@
   .container:has(.swiper-slide:only-child) > div.content {
     height: 100vh !important;
     border-top-style: unset !important;
+  }
+  div.content:is(.container) {
+    height: 100vh !important;
+  }
+  .ant-empty {
+    color: var(--text-secondary);
   }
 
   .emptyHeight {
@@ -112,10 +121,11 @@
 
   /* ant dropdown menu */
   .ant-dropdown,
-  .ant-select-dropdown {
+  .ant-select-dropdown,
+  .ant-dropdown-menu {
     transition: 0.15s ease;
     transform: unset !important;
-    backdrop-filter: blur(200px);
+    -webkit-transform: unset !important;
     border-radius: 5px !important;
   }
 
@@ -135,7 +145,8 @@
 
   .ant-dropdown-menu-item,
   .ant-select-dropdown-menu-item,
-  .ant-dropdown-content > .item {
+  .ant-dropdown-content > .item,
+  .ant-dropdown-menu-submenu-title {
     background-color: unset !important;
     border-radius: 6px !important;
     transition: unset !important;
@@ -152,9 +163,16 @@
   }
 
   .ant-dropdown-menu-item:hover,
-  .ant-select-dropdown-menu-item:hover {
+  .ant-select-dropdown-menu-item:hover,
+  .ant-dropdown-menu-submenu-title:hover {
     background-color: var(--primary-color-reduced) !important;
     border-color: var(--primary-color);
+  }
+  .ant-dropdown-menu-submenu-arrow {
+    right: 0px !important;
+  }
+  .ant-dropdown-menu-submenu-arrow * {
+    color: var(--button-text-color) !important;
   }
 
   /* checkbox */
@@ -228,7 +246,8 @@
   }
 
   div.top .ant-statistic-content,
-  div.top .countdown span {
+  div.top .countdown span,
+  div.top div > span {
     color: var(--canvas-text-color) !important;
   }
 
@@ -254,7 +273,7 @@
     background-color: var(--button-bg) !important;
     cursor: default !important;
     border-radius: 5px !important;
-    transition: border-color 0.15s ease, background-color 0.1s ease, box-shadow 0.15s ease !important;
+    transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease !important;
     text-shadow: unset !important;
     border-color: var(--btn-border-color) !important;
     border-width: 1px !important;
@@ -294,7 +313,7 @@
   .board > .tools > *:hover,
   div.nav > .put:hover {
     border-color: var(--primary-color) !important;
-    transition: background-color 0.1s ease, box-shadow 0.15s ease !important;
+    transition: background-color 0.15s ease, box-shadow 0.15s ease !important;
   }
 
   button.ant-btn:not([disabled="disabled"]):focus-visible,
@@ -328,6 +347,12 @@
   button.ant-btn-primary:not([disabled="disabled"]) {
     border-color: var(--primary-color) !important;
     background-color: var(--primary-color-reduced) !important;
+  }
+
+  /* score box */
+  .content-box > .score-box .item-2,
+  .content-box > .score-box .question-title {
+    color: var(--button-text-color) !important;
   }
 
   .content-box > .score-box .active-green:hover,
@@ -534,17 +559,32 @@
     background: var(--danger-color);
   }
 
-  /* iframe modal */
-  div.ant-modal-root > .ant-modal-wrap > .ant-modal {
+  /* windowed modal */
+  div.ant-modal-root > .ant-modal-wrap:has(> .ant-modal > .ant-modal-content > .ant-modal-body > iframe) {
+    overflow-y: hidden !important;
+  }
+  div.ant-modal-root > .ant-modal-wrap > .ant-modal:has(> .ant-modal-content >.ant-modal-body > iframe) {
     width: -moz-available !important;
-    height: -moz-available !important;
     top: 0 !important;
     padding-bottom: unset !important;
   }
+  div.ant-modal-root > .ant-modal-wrap > .ant-modal {
+    transform-origin: unset !important;
+    transform: unset !important;
+  }
 
   div.ant-modal-root > .ant-modal-wrap > .ant-modal .ant-modal-content {
-    border-radius: unset !important;
-    box-shadow: unset !important;
+    &:has( >.ant-modal-body > iframe) {
+      border-radius: unset !important;
+      box-shadow: unset !important;
+    }
+    &:not(:has( >.ant-modal-body > iframe)) {
+      border-radius: 5px !important;
+      border-style: solid;
+      border-color: color-mix(in srgb, var(--button-text-color) 50%, transparent);
+      border-width: 1px;
+      box-shadow: 0 6px 16px 0 var(--shadow-color) !important;
+    }
     background-color: var(--primary-bg) !important;
   }
 
@@ -553,25 +593,41 @@
   }
 
   div.ant-modal-root > .ant-modal-wrap > .ant-modal .ant-modal-body > iframe {
-    height: calc(100vh - 36px) !important;
+    height: calc(100vh - 32px) !important;
   }
 
   div.ant-modal-root > .ant-modal-wrap > .ant-modal .ant-modal-close-x {
     width: 24px !important;
     height: 24px !important;
-    line-height: 24px !important;
+    line-height: 0px !important;
     padding: 4px !important;
   }
 
   div.ant-modal-root > .ant-modal-wrap > .ant-modal .ant-modal-header {
-    padding-top: 4px !important;
-    padding-bottom: 4px !important;
+    &:not(:has(.ant-modal-body > iframe)) {
+      padding-top: 5px !important;
+      padding-bottom: 5px !important;
+    }
+    &:has(.ant-modal-body > iframe) {
+      padding: unset !important;
+    }
     padding-left: 12px !important;
-    background-color: #f8f8fa !important;
+    border-bottom-color: var(--border-color) !important;
+
+    @media (prefers-color-scheme: light) {
+      background: linear-gradient(color-mix(in srgb, var(--hybrid-bg) 25%, #fff), var(--hybrid-bg)) !important;
+    }
+    @media (prefers-color-scheme: dark) {
+      background: linear-gradient(color-mix(in srgb, var(--hybrid-bg) 95%, #fff), var(--hybrid-bg)) !important;
+    }
+    height: 32px !important;
+
+    position: sticky !important;
+    top: 0;
   }
 
   div.ant-modal-root > .ant-modal-wrap > .ant-modal .ant-modal-title {
-    color: #49494b !important;
+    color: var(--button-text-color) !important;
     font-size: 14px !important;
   }
 
@@ -579,13 +635,18 @@
     background-color: transparent !important;
     cursor: default !important;
     border-radius: 24px !important;
-    color: #535558 !important;
+    color: var(--button-text-color) !important;
     transition: unset !important;
+    margin: 5px !important;
+    vertical-align: unset !important;
   }
 
   button.ant-modal-close:hover {
-    background-color: #dc4250 !important;
-    color: var(--primary-bg) !important;
+    background-color: color-mix(in srgb, var(--danger-color) 64%, #fff) !important;
+    color: var(--hybrid-bg) !important;
+  }
+  button.ant-modal-close:active {
+    background-color: color-mix(in srgb, var(--danger-color) 64%, #000) !important;
   }
 
   /* statistics */
@@ -600,8 +661,30 @@
   }
 
   div.courseStatistics > .scoreRate {
-    border-color: #f7b100;
-    background-color: #f7b1003d !important;
+    border-color: var(--warning-color);
+    background-color: var(--warning-color-reduced) !important;
+  }
+
+  div.courseStatistics > .scoreRate .select-box {
+    background-color: var(--warning-color-reduced) !important;
+    border-width: 1px;
+    border-color: var(--warning-color);
+    border-top-style: solid;
+    border-bottom-style: solid;
+    &:is(.select-box-left),
+    &:is(.select-w) {
+      border-top-left-radius: 5px !important;
+      border-bottom-left-radius: 5px !important;
+      border-left-style: solid;
+    }
+    &:is(.select-box-right),
+    &:is(.select-w) {
+      border-top-right-radius: 5px !important;
+      border-bottom-right-radius: 5px !important;
+      border-right-style: solid;
+    }
+
+    padding: unset !important;
   }
 
   div.courseStatistics > .scoreRate .ant-row-flex * {
@@ -610,14 +693,26 @@
   }
 
   div.courseStatistics > .tag {
-    border-color: #a0a0a0;
-    background-color: #a0a0a03d !important;
+    border-color: var(--border-color);
+    background-color: var(--border-color-reduced) !important;
   }
 
   div.courseStatistics > .tag * {
     font-weight: unset !important;
     color: var(--canvas-text-color) !important;
   }
+
+
+  div.courseStatistics > .tag .select {
+    background-color: var(--border-color-reduced) !important;
+    border-radius: 5px !important;
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--border-color);
+
+    padding: unset !important;
+  }
+
 
   div.courseStatistics > .tag .ant-col {
     background-color: unset !important;
@@ -640,6 +735,8 @@
     border-width: 1px;
     border-style: solid;
     border-color: var(--primary-color);
+
+    padding: unset !important;
   }
 
   /* slider */
@@ -691,7 +788,7 @@
   }
 
   div.nav > .put {
-    z-index: 1000;
+    z-index: 999;
     width: 36px !important;
     height: 36px !important;
     background-color: #fcfcfc30 !important;
@@ -728,7 +825,8 @@
   div.nav > .treeBox .ant-tree-node-content-wrapper,
   div.nav > .treeBox .ant-tree-title,
   div.nav > .treeBox .ant-tree-title span,
-  div.nav > .treeBox .ant-tree-treenode-selected {
+  div.nav > .treeBox .ant-tree-treenode-selected,
+  div.nav > .treeBox .noMsg {
     color: var(--canvas-text-color) !important;
   }
 
@@ -751,7 +849,8 @@
     margin-top: unset !important;
   }
 
-  div.nav > .treeBox > .roll-box > * > .folder .folderName > span {
+  div.nav > .treeBox > .roll-box > * > .folder .folderName,
+  div.nav > .treeBox > .roll-box > * > .folder .folderName .ant-badge {
     color: var(--canvas-text-color) !important;
   }
 
@@ -767,6 +866,7 @@
   .ant-tree.ant-tree-directory .ant-tree-child-tree > li span.ant-tree-node-content-wrapper:hover::before,
   .ant-tree.ant-tree-directory > li span.ant-tree-node-content-wrapper:hover::before {
     background-color: color-mix(in srgb, var(--primary-color-reduced) var(--alpha), transparent) !important;
+    color: var(--canvas-text-color) !important;
   }
 
   div.nav > .treeBox > .roll-box > * > .folder .folderName[data-v-56a2485d]:active,
@@ -798,12 +898,14 @@
   }
 
   div.nav > .treeBox .c-f0[data-v-c0063122] > .ant-tree-node-content-wrapper > .ant-tree-title,
-  div.nav > .treeBox .c-f0[data-v-93794d94] > .ant-tree-node-content-wrapper > .ant-tree-title {
+  div.nav > .treeBox .c-f0[data-v-93794d94] > .ant-tree-node-content-wrapper > .ant-tree-title,
+  div.nav > .treeBox > .roll-box > * > .folder .folderName[style="color: rgb(255, 0, 0);"]:empty,
+  div.nav > .treeBox > .roll-box > * > .folder .folderName > span[style="color: rgb(255, 0, 0);"] .ant-badge {
     text-decoration: underline;
     text-decoration-color: var(--primary-color);
     text-decoration-line: underline;
     text-decoration-style: solid;
-    text-decoration-thickness: 1.5px;
+    text-decoration-thickness: 1px;
     text-underline-offset: 2.5px;
   }
 
@@ -836,10 +938,12 @@
     .quesContent .textContent,
     .quesContent .itemContent .txt img,
     .quesContent .textContent img,
-    .quesContent .questionAnswer,
-    .quesContent .questionAnalysis,
-    .quesContent .questionAnswer img,
-    .quesContent .questionAnalysis img {
+    .questionAnswer,
+    .questionAnalysis,
+    .questionAnswer img,
+    .questionAnalysis img,
+    .question-body .question-box .txt,
+    .question-body .question-box .txt img {
       filter: invert(100%);
     }
 
@@ -852,7 +956,8 @@
   }
   .quesContent .alreadyAnswer .answer,
   .quesContent .result,
-  .quesContent .result2 > .imgBox {
+  .quesContent .result2 > .imgBox,
+  .answer-box .subjective > .img-box {
     color: var(--canvas-text-color) !important;
     border-color: var(--text-secondary) !important;
     border-style: solid !important;
@@ -865,7 +970,7 @@
     font-size: 16px !important;
     font-weight: 350 !important;
     height: 25px !important;
-    width: 75px !important;
+    width: 54px !important;
     text-align: center !important;
     line-height: unset !important;
   }
@@ -873,28 +978,39 @@
     padding-top: 0px !important;
   }
   .quesContent .alreadyAnswer .answer:has(+ .true),
-  .quesContent .result2 > .trueBorder > .bg > span {
+  .quesContent .result2 > .trueBorder > .bg > span,
+  .answer-box .subjective > .img-box:is(.trueBorder) .font-source {
     background-color: var(--positive-color-reduced) !important;
   }
-  .quesContent .result2 > .trueBorder > .bg span {
+  .quesContent .result2 > .trueBorder > .bg span,
+  .answer-box .subjective > .img-box:is(.trueBorder) .font-source,
+  .answer-box .subjective > .img-box:is(.trueBorder) .font-source span {
     color: color-mix(in srgb, var(--positive-color) var(--alpha), var(--primary-bg)) !important;
   }
   .quesContent .alreadyAnswer .answer:has(+ .error),
-  .quesContent .result2 > .errorBorder > .bg > span {
+  .quesContent .result2 > .errorBorder > .bg > span,
+  .answer-box .subjective > .img-box:is(.errorBorder) .font-source {
     background-color: var(--danger-color-reduced) !important;
   }
-  .quesContent .result2 > .errorBorder > .bg span {
+  .quesContent .result2 > .errorBorder > .bg span,
+  .answer-box .subjective > .img-box:is(.errorBorder) .font-source,
+  .answer-box .subjective > .img-box:is(.errorBorder) .font-source span {
     color: color-mix(in srgb, var(--danger-color) var(--alpha), var(--primary-bg)) !important;
   }
   .quesContent .alreadyAnswer .answer:has(+ .partRight),
-  .quesContent .result2 > .partRightBorder > .bg > span {
+  .quesContent .result2 > .partRightBorder > .bg > span,
+  .answer-box .subjective > .img-box:is(.partRightBorder) .font-source {
     background-color: var(--warning-color-reduced) !important;
   }
-  .quesContent .result2 > .partRightBorder > .bg span {
+  .quesContent .result2 > .partRightBorder > .bg span,
+  .answer-box .subjective > .img-box:is(.partRightBorder) .font-source,
+  .answer-box .subjective > .img-box:is(.partRightBorder) .font-source span {
     color: color-mix(in srgb, var(--warning-color) var(--alpha), var(--primary-bg)) !important;
   }
   .quesContent .result2 .bg > span,
-  .quesContent .result2 .imgBox {
+  .quesContent .result2 .imgBox,
+  .answer-box .subjective > .img-box,
+  .answer-box .subjective > .img-box .font-source {
     text-align: center !important;
     height: 90px !important;
     width: 130px !important;
@@ -902,7 +1018,8 @@
   .quesContent .result2 .bg > span {
     backdrop-filter: brightness(0.75);
   }
-  .quesContent .badge-box {
+  .quesContent .badge-box,
+  .answer-box .badge-box {
     color: transparent !important;
     border-style: solid !important;
     border-width: 1px !important;
@@ -927,6 +1044,17 @@
     border-bottom-right-radius: 5px !important;
     border-right-width: 1px !important;
   }
+
+  .anticon-check:is(.true) {
+    color: var(--positive-color) !important;
+  }
+  .lx-partially-line:is(.partRight) {
+    color: var(--warning-color) !important;
+  }
+  .anticon-close:is(.error) {
+    color: var(--danger-color) !important;
+  }
+
 
   /* ai table */
   .container > .content:has(.content-box > .table) {
@@ -981,7 +1109,9 @@
     .content .myAnswer,
     .content .result2,
     .container .tabs,
-    .content .file {
+    .content .quesContent:has(.file),
+    .content .quesContent *:has(> .questionAnswer),
+    .content .quesContent .ant-btn {
       display: none !important;
     }
     .ant-tag {
