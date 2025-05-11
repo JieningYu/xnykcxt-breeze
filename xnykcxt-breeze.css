@@ -527,8 +527,8 @@
   div.tabs .swiper-container > .swiper-wrapper > .sideActive:hover {
     background-color: var(--primary-bg) !important;
     border-top-color: var(--primary-color) !important;
-    border-left-color: var(--border-color-reduced) !important;
-    border-right-color: var(--border-color-reduced) !important;
+    border-left-color: var(--border-color) !important;
+    border-right-color: var(--border-color) !important;
     border-bottom-color: var(--primary-bg) !important;
     border-top-left-radius: 5px !important;
     border-top-right-radius: 5px !important;
@@ -615,7 +615,7 @@
     border-bottom-color: var(--border-color) !important;
 
     @media (prefers-color-scheme: light) {
-      background: linear-gradient(color-mix(in srgb, var(--hybrid-bg) 25%, #fff), var(--hybrid-bg)) !important;
+      background: linear-gradient(color-mix(in srgb, var(--hybrid-bg) 35%, #fff), var(--hybrid-bg)) !important;
     }
     @media (prefers-color-scheme: dark) {
       background: linear-gradient(color-mix(in srgb, var(--hybrid-bg) 95%, #fff), var(--hybrid-bg)) !important;
@@ -881,7 +881,6 @@
   div.nav > .treeBox > .roll-box > * > .folder .ant-tree *::before,
   div.nav > .treeBox > .roll-box > * > .folder .ant-tree *::after {
     transition: unset !important;
-    transform: unset !important;
     cursor: default !important;
   }
 
@@ -947,7 +946,8 @@
       filter: invert(100%);
     }
 
-    .quesContent img {
+    .quesContent img,
+    .question-body img {
       background-color: white;
     }
   }
@@ -1057,7 +1057,7 @@
 
 
   /* ai table */
-  .container > .content:has(.content-box > .table) {
+  .container > .content .content-box > .table .box {
     color: var(--canvas-text-color) !important;
   }
 
