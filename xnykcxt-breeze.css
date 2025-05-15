@@ -127,6 +127,8 @@
     transform: unset !important;
     -webkit-transform: unset !important;
     border-radius: 5px !important;
+
+    user-select: none !important;
   }
 
   .ant-dropdown-menu,
@@ -232,6 +234,8 @@
 
     width: -moz-available !important;
     margin-right: 10px;
+
+    user-select: none !important;
   }
 
   .container > div.content div.top:hover {
@@ -287,6 +291,8 @@
     &:is([disabled="disabled"]) {
       color: var(--disabled-button-text-color) !important;
     }
+
+    user-select: none !important;
   }
 
   div.nav > .put {
@@ -483,6 +489,8 @@
   }
   div.tabs .swiper_box {
     background-color: var(--primary-bg) !important;
+
+    user-select: none !important;
   }
   div.tabs .swiper-container > .swiper-wrapper,
   div.tabs .swiper-container {
@@ -748,6 +756,8 @@
     height: 36px !important;
     min-height: unset !important;
     border-color: var(--border-color);
+
+    user-select: none !important;
   }
 
   body:has(.swiper-slide:only-child) .slider,
@@ -814,6 +824,8 @@
     border-right-style: solid;
     height: calc(100vh - 36px) !important;
     width: 200px !important;
+
+    user-select: none !important;
   }
 
   div.nav > .treeBox > .title {
