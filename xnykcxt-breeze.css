@@ -2,7 +2,7 @@
   :root {
     --system-accent-color: AccentColor;
 
-    --primary-bg-reduced: color-mix(in srgb, var(--secondary-bg) var(--alpha), transparent);
+    --primary-bg-reduced: color-mix(in srgb, var(--primary-bg) var(--alpha), transparent);
     --primary-color: var(--system-accent-color, #38ADEA);
     --primary-color-reduced: color-mix(in srgb, var(--primary-color) var(--alpha), transparent);
     --shadow-color: #0000005c;
@@ -137,7 +137,7 @@
     border-radius: 5px !important;
     background-color: var(--card-bg) !important;
     border-color: var(--border-color);
-    border-width: 0.75px;
+    border-width: 1px;
     border-style: solid;
     backdrop-filter: unset;
     cursor: default !important;
@@ -154,7 +154,7 @@
     transition: unset !important;
     cursor: default !important;
     border-color: transparent;
-    border-width: 1px;
+    border-width: 1.2px;
     border-style: solid;
     min-height: unset !important;
     line-height: 20px !important;
@@ -192,7 +192,7 @@
     width: 18px !important;
     height: 18px !important;
     border-color: var(--border-color-reduced) !important;
-    border-width: 1px !important;
+    border-width: 1.2px !important;
     border-style: solid !important;
     content: " " !important;
     background-color: var(--canvas-bg) !important;
@@ -219,16 +219,23 @@
 
   /* topbar */
   .container > div.content div.top {
-    background-color: transparent !important;
+    @media (prefers-color-scheme: light) {
+      background-color: transparent !important;
+    }
+    @media (prefers-color-scheme: dark) {
+      background-color: var(--primary-bg-reduced) !important;
+    }
     padding: 6px !important;
 
     border-radius: 5px !important;
     border-color: var(--border-color-reduced);
-    border-width: 1px;
+    border-width: 1.2px;
     border-style: solid;
 
     box-shadow: unset !important;
-    transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease !important;
+    transition: background-color 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease !important;
 
     bottom: 10px;
 
@@ -281,7 +288,7 @@
     transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease !important;
     text-shadow: unset !important;
     border-color: var(--btn-border-color) !important;
-    border-width: 1px !important;
+    border-width: 1.2px !important;
     border-style: solid;
     @media (prefers-color-scheme: light) {
       box-shadow: 0 1.25px 0 0 var(--btn-border-color) !important;
@@ -419,7 +426,7 @@
   .board > .tools > * {
     background-color: transparent !important;
     border-color: transparent !important;
-    border-width: 1px;
+    border-width: 1.2px;
     border-style: solid;
     box-shadow: unset !important;
     &:not([disabled="disabled"]) {
@@ -521,8 +528,8 @@
     border-bottom-style: solid;
     border-left-style: solid;
     border-right-style: solid;
-    border-left-width: 1px;
-    border-right-width: 1px;
+    border-left-width: 0.5px;
+    border-right-width: 0.5px;
     border-color: transparent !important;
     width: 175px !important;
     cursor: default !important;
@@ -665,7 +672,7 @@
 
   div.courseStatistics > * {
     border-radius: 5px !important;
-    border-width: 1px;
+    border-width: 1.2px;
     border-style: solid;
   }
 
@@ -676,7 +683,7 @@
 
   div.courseStatistics > .scoreRate .select-box {
     background-color: var(--warning-color-reduced) !important;
-    border-width: 1px;
+    border-width: 1.2px;
     border-color: var(--warning-color);
     border-top-style: solid;
     border-bottom-style: solid;
@@ -715,7 +722,7 @@
   div.courseStatistics > .tag .select {
     background-color: var(--border-color-reduced) !important;
     border-radius: 5px !important;
-    border-width: 1px;
+    border-width: 1.2px;
     border-style: solid;
     border-color: var(--border-color);
 
@@ -741,7 +748,7 @@
   div.courseStatistics > .time .select {
     background-color: var(--primary-color-reduced) !important;
     border-radius: 5px !important;
-    border-width: 1px;
+    border-width: 1.2px;
     border-style: solid;
     border-color: var(--primary-color);
 
@@ -763,7 +770,7 @@
 
   body:has(.swiper-slide:only-child) .slider,
   body:not(:has(.swiper-slide)) .slider {
-    border-width: 1px;
+    border-width: 1.2px;
     border-right-style: solid;
   }
 
@@ -917,7 +924,7 @@
     text-decoration-color: var(--primary-color);
     text-decoration-line: underline;
     text-decoration-style: solid;
-    text-decoration-thickness: 1px;
+    text-decoration-thickness: 1.2px;
     text-underline-offset: 2.5px;
   }
 
@@ -927,10 +934,10 @@
 
   /* quests */
   .content .quesContent {
-    border-width: 1px !important;
     border-radius: 5px !important;
     margin-top: 0 !important;
     border-color: transparent !important;
+    border-style: none !important;
   }
 
   .content .quesContent:hover,
@@ -974,7 +981,7 @@
     color: var(--canvas-text-color) !important;
     border-color: var(--text-secondary) !important;
     border-style: solid !important;
-    border-width: 1px !important;
+    border-width: 1.2px !important;
     border-radius: 0 !important;
     background-color: transparent !important;
   }
@@ -1050,12 +1057,12 @@
   .quesContent:is(.active) > ul > li:nth-of-type(1) .ant-btn {
     border-top-left-radius: 5px !important;
     border-bottom-left-radius: 5px !important;
-    border-left-width: 1px !important;
+    border-left-width: 1.2px !important;
   }
   .quesContent:is(.active) > ul > li:nth-last-of-type(1) .ant-btn {
     border-top-right-radius: 5px !important;
     border-bottom-right-radius: 5px !important;
-    border-right-width: 1px !important;
+    border-right-width: 1.2px !important;
   }
 
   .anticon-check:is(.true) {
