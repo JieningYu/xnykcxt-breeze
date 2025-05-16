@@ -219,7 +219,7 @@
 
   /* topbar */
   .container > div.content div.top {
-    background-color: var(--primary-bg-reduced) !important;
+    background-color: transparent !important;
     padding: 6px !important;
 
     border-radius: 5px !important;
@@ -228,7 +228,7 @@
     border-style: solid;
 
     box-shadow: unset !important;
-    transition: background-color 0.15s ease, box-shadow 0.15s ease !important;
+    transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease !important;
 
     bottom: 10px;
 
@@ -240,6 +240,7 @@
 
   .container > div.content div.top:hover {
     background-color: var(--primary-bg) !important;
+    border-color: var(--border-color) !important;
     box-shadow: 0 2px 12px 2px #0000002b !important;
     backdrop-filter: unset;
     transition: unset !important;
