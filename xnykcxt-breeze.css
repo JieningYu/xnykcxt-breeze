@@ -60,8 +60,8 @@
 
   body > * > .wrap > .router-view {
     border-radius: unset !important;
-    width: -moz-available !important;
-    height: -moz-available !important;
+    width: 100% !important;
+    height: 100% !important;
     margin: unset !important;
   }
 
@@ -239,7 +239,9 @@
 
     bottom: 10px;
 
-    width: -moz-available !important;
+    width: auto !important;
+    /* placeholder for universal platforms */
+    width: -webkit-fill-available !important;
     margin-right: 10px;
 
     user-select: none !important;
@@ -580,7 +582,7 @@
     overflow-y: hidden !important;
   }
   div.ant-modal-root > .ant-modal-wrap > .ant-modal:has(> .ant-modal-content >.ant-modal-body > iframe) {
-    width: -moz-available !important;
+    width: 100% !important;
     top: 0 !important;
     padding-bottom: unset !important;
   }
@@ -759,7 +761,7 @@
   div.nav > .slider {
     background-color: var(--primary-bg) !important;
     color: var(--canvas-text-color) !important;
-    width: -moz-available !important;
+    width: 100% !important;
     margin-right: unset !important;
     height: 36px !important;
     min-height: unset !important;
@@ -784,7 +786,7 @@
     background-color: transparent !important;
     border-radius: unset !important;
     width: 43px !important;
-    height: -moz-available !important;
+    height: 100% !important;
     line-height: 34px !important;
     cursor: default !important;
     border-color: transparent;
@@ -1117,7 +1119,7 @@
     html > body {
       overflow: visible !important;
       display: block !important;
-      height: -moz-available !important;
+      height: 100% !important;
     }
     .content {
       border-style: unset !important;
