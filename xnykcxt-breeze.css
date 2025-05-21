@@ -1005,7 +1005,7 @@
   .quesContent .result2 > .trueBorder > .bg span,
   .answer-box .subjective > .img-box:is(.trueBorder) .font-source,
   .answer-box .subjective > .img-box:is(.trueBorder) .font-source span {
-    color: color-mix(in srgb, var(--positive-color) var(--alpha), var(--primary-bg)) !important;
+    color: color-mix(in srgb, var(--positive-color) 24%, #fff) !important;
   }
   .quesContent .alreadyAnswer .answer:has(+ .error),
   .quesContent .result2 > .errorBorder > .bg > span,
@@ -1015,7 +1015,7 @@
   .quesContent .result2 > .errorBorder > .bg span,
   .answer-box .subjective > .img-box:is(.errorBorder) .font-source,
   .answer-box .subjective > .img-box:is(.errorBorder) .font-source span {
-    color: color-mix(in srgb, var(--danger-color) var(--alpha), var(--primary-bg)) !important;
+    color: color-mix(in srgb, var(--danger-color) 24%, #fff) !important;
   }
   .quesContent .alreadyAnswer .answer:has(+ .partRight),
   .quesContent .result2 > .partRightBorder > .bg > span,
@@ -1025,7 +1025,7 @@
   .quesContent .result2 > .partRightBorder > .bg span,
   .answer-box .subjective > .img-box:is(.partRightBorder) .font-source,
   .answer-box .subjective > .img-box:is(.partRightBorder) .font-source span {
-    color: color-mix(in srgb, var(--warning-color) var(--alpha), var(--primary-bg)) !important;
+    color: color-mix(in srgb, var(--warning-color) 24%, #fff) !important;
   }
   .quesContent .result2 .bg > span,
   .quesContent .result2 .imgBox,
