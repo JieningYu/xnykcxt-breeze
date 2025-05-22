@@ -239,8 +239,10 @@
 
     bottom: 10px;
 
-    width: auto !important;
-    /* placeholder for universal platforms */
+    @supports (width: stretch) {
+      width: stretch !important;
+    }
+    width: -moz-available !important;
     width: -webkit-fill-available !important;
     margin-right: 10px;
 
