@@ -793,7 +793,11 @@
     cursor: default !important;
     border-color: transparent;
     border-top-width: 4px;
+    border-left-width: 0.6px;
+    border-right-width: 0.6px;
     border-top-style: solid;
+    border-left-style: solid;
+    border-right-style: solid;
     color: var(--canvas-text-color) !important;
   }
 
@@ -805,8 +809,11 @@
   div.nav > .slider .menu > .active,
   div.nav > .slider .menu > *:active {
     background-color: var(--primary-color-reduced) !important;
-    border-width: 4px;
-    border-color: var(--primary-color);
+    border-top-color: var(--primary-color);
+  }
+  div.nav > .slider .menu > .active {
+    border-left-color: var(--border-color);
+    border-right-color: var(--border-color);
   }
 
   div.nav > .put {
@@ -866,11 +873,21 @@
   div.nav > .treeBox > .roll-box > * > .folder {
     padding: unset !important;
   }
+  div.nav > .treeBox > .roll-box > * > .folder > * {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
 
   div.nav > .treeBox > .roll-box > * > .folder .folderName {
     background-color: transparent !important;
     border-radius: unset !important;
-    margin-top: unset !important;
+    height: 24px !important;
+    line-height: 24px !important;
+    margin-bottom: 4px !important;
+    margin-top: 4px !important;
   }
 
   div.nav > .treeBox > .roll-box > * > .folder .folderName,
@@ -1144,6 +1161,16 @@
     }
     .quesContent {
       display: block !important;
+      img {
+        max-width: unset !important;
+      }
+    }
+
+    .itemContent {
+      break-inside: avoid;
+    }
+    .itemContent *:not(.tagBox) {
+      break-inside: auto !important;
     }
   }
 }
