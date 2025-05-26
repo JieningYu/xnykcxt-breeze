@@ -582,6 +582,10 @@
   /* windowed modal */
   div.ant-modal-root > .ant-modal-wrap:has(> .ant-modal > .ant-modal-content > .ant-modal-body > iframe) {
     overflow-y: hidden !important;
+    & > .ant-modal {
+      max-width: unset !important;
+      margin: unset !important;
+    }
   }
   div.ant-modal-root > .ant-modal-wrap > .ant-modal:has(> .ant-modal-content >.ant-modal-body > iframe) {
     width: 100% !important;
@@ -1161,9 +1165,6 @@
     }
     .quesContent {
       display: block !important;
-      img {
-        max-width: unset !important;
-      }
     }
 
     .itemContent {
