@@ -496,6 +496,9 @@
   }
 
   /* tabs */
+  div.tabs {
+    margin-top: unset !important;
+  }
   div.tabs .swiper_box:has(.swiper-slide:only-child) {
     display: none !important;
   }
