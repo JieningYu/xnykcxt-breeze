@@ -692,14 +692,14 @@
   }
 
   div.courseStatistics > .scoreRate {
-    border-color: var(--warning-color);
-    background-color: var(--warning-color-reduced) !important;
+    border-color: var(--primary-color);
+    background-color: var(--primary-color-reduced) !important;
   }
 
   div.courseStatistics > .scoreRate .select-box {
-    background-color: var(--warning-color-reduced) !important;
+    background-color: var(--primary-color-reduced) !important;
     border-width: 1.2px;
-    border-color: var(--warning-color);
+    border-color: var(--primary-color);
     border-top-style: solid;
     border-bottom-style: solid;
     &:is(.select-box-left),
@@ -750,8 +750,8 @@
   }
 
   div.courseStatistics > .time {
-    border-color: var(--primary-color);
-    background-color: var(--primary-color-reduced) !important;
+    border-color: var(--border-color);
+    background-color: var(--border-color-reduced) !important;
   }
 
   div.courseStatistics > .time dt,
@@ -761,11 +761,11 @@
   }
 
   div.courseStatistics > .time .select {
-    background-color: var(--primary-color-reduced) !important;
+    background-color: var(--border-color-reduced) !important;
     border-radius: 5px !important;
     border-width: 1.2px;
     border-style: solid;
-    border-color: var(--primary-color);
+    border-color: var(--border-color);
 
     padding: unset !important;
   }
@@ -859,6 +859,7 @@
     user-select: none !important;
 
     min-width: 200px;
+    max-width: calc(100vw - 54px);
     resize: horizontal;
   }
 
